@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>FruitGuard</title>
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="apple-touch-icon" href="icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=300" />
+</head>
+<body>
+  <!-- SPLASH -->
+  <div id="splash" class="splash" aria-busy="true" aria-live="polite">
+    <div class="splash-bg" aria-hidden="true">
+      <div class="splash-orb splash-orb-a"></div>
+      <div class="splash-orb splash-orb-b"></div>
+      <div class="splash-grid"></div>
+      <div class="splash-scan"></div>
+    </div>
+
+    <div class="splash-core">
+      <div class="splash-mark">
+        <div class="splash-ring"></div>
+        <div class="splash-ring splash-ring-2"></div>
+        <img class="splash-icon" src="icon.png" alt="" width="88" height="88" />
+      </div>
+      <h1 class="splash-brand">FruitGuard</h1>
+      <p class="splash-tag">Frescura detectada al instante</p>
+      <div class="splash-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="splash-bar-fill" id="splashFill"></div>
+      </div>
+      <p class="splash-status" id="splashStatus">Calibrando sensores…</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="appShell" class="app-shell is-locked">
+    <header class="header">
+      <div class="brand">
+        <img src="icon.png" alt="" class="brand-icon" width="28" height="28" />
+        <span class="brand-name">FruitGuard</span>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-mode="live" type="button">En vivo</button>
+        <button class="tab" data-mode="upload" type="button">Subir</button>
+      </nav>
+    </header>
+
+    <main class="main">
+      <!-- LIVE -->
+      <section class="panel panel-live" id="livePanel">
+        <div class="stage">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="snap" class="hidden"></canvas>
+          <div class="overlay-ring" aria-hidden="true"></div>
+          <div class="live-badge" id="liveBadge">Cámara apagada</div>
+        </div>
+
+        <aside class="dock">
+          <div class="live-result" id="liveResult">
+            <div class="live-emoji" id="liveEmoji">👀</div>
+            <div class="live-text">
+              <h2 id="liveFruit">Apunta a una fruta</h2>
+              <p id="liveEstado">Activa la cámara para detectar</p>
+              <p class="live-conf" id="liveConf"></p>
+            </div>
+          </div>
+          <div class="top-list" id="topList"></div>
+          <div class="actions">
+            <button class="btn-primary" id="camBtn" type="button">Encender cámara</button>
+            <label class="speed">
+              <span>Vel.</span>
+              <select id="speedSelect" aria-label="Velocidad de detección">
+                <option value="250">Rápida</option>
+                <option value="400" selected>Normal</option>
+                <option value="700">Suave</option>
+              </select>
+            </label>
+          </div>
+        </aside>
+      </section>
+
+      <!-- UPLOAD -->
+      <section class="panel panel-upload hidden" id="uploadPanel">
+        <div class="upload-stage">
+          <div class="drop-zone" id="dropZone" role="button" tabindex="0">
+            <div class="drop-icon">📁</div>
+            <p class="drop-title">Arrastra o elige una foto</p>
+            <p class="drop-sub">JPG · PNG · WEBP</p>
+            <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" hidden />
+          </div>
+          <div class="preview-zone hidden" id="previewZone">
+            <img id="previewImg" alt="Vista previa" />
+            <button class="btn-ghost" id="changeBtn" type="button">Cambiar</button>
+          </div>
+        </div>
+
+        <aside class="dock">
+          <button class="btn-primary btn-block" id="analyzeBtn" type="button" disabled>
+            <span id="btnText">Analizar fruta</span>
+            <span id="btnSpinner" class="spinner hidden"></span>
+          </button>
+          <div class="live-result hidden" id="uploadResult">
+            <div class="live-emoji" id="upEmoji"></div>
+            <div class="live-text">
+              <h2 id="upFruit"></h2>
+              <p id="upEstado"></p>
+              <p class="live-conf" id="upConf"></p>
+            </div>
+          </div>
+          <div class="top-list" id="upTopList"></div>
+        </aside>
+      </section>
+
+      <div class="error-toast hidden" id="errorCard" role="alert">
+        <span>⚠️</span>
+        <p id="errorMsg"></p>
+        <button type="button" class="error-close" id="errorClose" aria-label="Cerrar">×</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js?v=301"></script>
+</body>
+</html>

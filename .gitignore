@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.env
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Datos / entrenamiento (no van al repo)
+dataset_raw/
+training/
+*.zip
+feature_cache*/
+*.npy
+
+# Jupyter / Gradio legacy
+.ipynb_checkpoints/
+.gradio/
+*.ipynb
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs / temporales
+*.log
+*.bak
+*.tmp
+*.sqlite3
+*.db
+
+# Modelos RF legacy (ya no se usan)
+*.pkl
+
+# Mantener el CNN y el icono del frontend
+!backend/models/fruit_cnn.pt
+!frontend/icon.png
