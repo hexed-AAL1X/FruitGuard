@@ -62,7 +62,8 @@
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
 <div align="center">
-  <img src="assets/images/logo.png" alt="FruitGuard" width="160">
+  <img src="assets/images/dashboard.png" alt="FruitGuard dashboard — detección real de banana fresca" width="900">
+  <p><em>Captura real de la app: banana clasificada como fresca</em></p>
 </div>
 
 **FruitGuard** es un sistema de control de calidad alimentaria que clasifica frutas/verduras por **tipo** y **estado** (fresca o podrida) a partir de imágenes, con cámara en vivo o foto subida.
