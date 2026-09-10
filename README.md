@@ -102,7 +102,7 @@ Here's why:
 > | ML | ![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-005CED?style=for-the-badge&logo=onnx&logoColor=white&color=black) |
 
 > [!IMPORTANT]  
-> El modelo ya viene entrenado en `backend/models/fruit_cnn.pt`. **No hace falta** el dataset para usar la app; solo si quieres reentrenar.
+> El modelo ya viene entrenado en `backend/models/fruit_cnn.onnx`. **No hace falta** el dataset para usar la app; solo si quieres reentrenar.
 
 > [!WARNING]  
 > No es un modelo tipo GPT/Gemini: puede fallar en fotos difíciles (pantallas, fondos raros, clases muy parecidas). Sigue mejorando con priors + ensemble.
@@ -165,7 +165,7 @@ Instrucciones para levantar FruitGuard en local.
 ```
 FruitGuard/
 ├── backend/          # FastAPI + CNN
-│   └── models/fruit_cnn.pt
+│   └── models/fruit_cnn.onnx
 ├── frontend/         # UI web
 ├── assets/images/    # Logo README
 └── README.md
