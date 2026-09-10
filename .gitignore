@@ -42,8 +42,10 @@ Desktop.ini
 # Modelos RF legacy (ya no se usan)
 *.pkl
 
-# Mantener el CNN y el icono del frontend
+# Mantener modelos e iconos
 !backend/models/fruit_cnn.pt
+!backend/models/fruit_cnn.onnx
+!backend/models/fruit_cnn_meta.json
 !frontend/icon.png
 !assets/images/logo.png
 !assets/images/dashboard.png

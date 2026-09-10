@@ -73,7 +73,7 @@ Nació para reemplazar la inspección manual —lenta y subjetiva— con un pipe
 Here's why:
 
 * Detecta en **tiempo real** desde la webcam o desde una imagen.
-* Usa un **CNN (MobileNetV3)** entrenado con Freshness44 + ensemble en inferencia.
+* Usa un **CNN (MobileNetV3 → ONNX)** entrenado con Freshness44 + ensemble en inferencia.
 * Backend **FastAPI** + frontend web (sin Gradio).
 * Pensado para desplegarse en un solo servicio (p. ej. Render).
 
@@ -81,9 +81,10 @@ Here's why:
 ### Built With
 * ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)&nbsp;
 * ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)&nbsp;
-* ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)&nbsp;
+* ![ONNX](https://img.shields.io/badge/ONNX-005CED?style=for-the-badge&logo=onnx&logoColor=white)&nbsp;
 * ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)&nbsp;
 * ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)&nbsp;
+* ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)&nbsp;
 * ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)&nbsp;
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -98,7 +99,7 @@ Here's why:
 > |-------------|-------------|
 > | Python | ![Python](https://img.shields.io/badge/Python_3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white&color=black) |
 > | API | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white&color=black) |
-> | ML | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white&color=black) |
+> | ML | ![ONNX Runtime](https://img.shields.io/badge/ONNX_Runtime-005CED?style=for-the-badge&logo=onnx&logoColor=white&color=black) |
 
 > [!IMPORTANT]  
 > El modelo ya viene entrenado en `backend/models/fruit_cnn.pt`. **No hace falta** el dataset para usar la app; solo si quieres reentrenar.

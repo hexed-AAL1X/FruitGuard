@@ -43,6 +43,7 @@
     "rotten_tomato",
     "rotten_watermelon"
   ],
-  "acc": 0.9463267359946327,
-  "dataset": "freshness44"
+  "img_size": 224,
+  "format": "onnx",
+  "acc": 0.9463267359946327
 }

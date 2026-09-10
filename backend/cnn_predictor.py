@@ -15,21 +15,21 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-import torch
-import torch.nn as nn
+import onnxruntime as ort
 from PIL import Image, ImageOps
-from torchvision import models, transforms
 
 from preprocess import isolate_fruit_on_white
 
 MODELS_DIR = Path(__file__).parent / "models"
-CKPT = MODELS_DIR / "fruit_cnn.pt"
+ONNX = MODELS_DIR / "fruit_cnn.onnx"
+META = MODELS_DIR / "fruit_cnn_meta.json"
+CKPT = MODELS_DIR / "fruit_cnn.pt"  # legacy; prefer ONNX en prod
 
-_model = None
+_session = None
 _classes: list[str] = []
-_tf = None
 _img_size = 224
 _class_index: dict[str, int] = {}
+_input_name = "input"
 
 # Clases con pocas muestras en Freshness44 → suelen disparar falsos positivos en fotos web
 RARE_FRUITS = {
@@ -92,33 +92,31 @@ FRUIT_EMOJI = {
 
 
 def available() -> bool:
-    return CKPT.exists()
-
-
-def _build(n: int) -> nn.Module:
-    m = models.mobilenet_v3_small(weights=None)
-    m.classifier[-1] = nn.Linear(m.classifier[-1].in_features, n)
-    return m
+    return ONNX.exists() or CKPT.exists()
 
 
 def _load():
-    global _model, _classes, _tf, _img_size, _class_index
-    if _model is not None:
+    global _session, _classes, _img_size, _class_index, _input_name
+    if _session is not None:
         return
-    ckpt = torch.load(CKPT, map_location="cpu", weights_only=False)
-    _classes = list(ckpt["classes"])
+    if not ONNX.exists():
+        raise RuntimeError(
+            "Falta fruit_cnn.onnx. Exporta el modelo o vuelve a desplegar con el ONNX incluido."
+        )
+    if META.exists():
+        import json
+
+        meta = json.loads(META.read_text())
+        _classes = list(meta["classes"])
+        _img_size = int(meta.get("img_size", 224))
+    else:
+        raise RuntimeError("Falta fruit_cnn_meta.json con las clases del modelo.")
     _class_index = {c: i for i, c in enumerate(_classes)}
-    _img_size = int(ckpt.get("img_size", 224))
-    _model = _build(len(_classes))
-    _model.load_state_dict(ckpt["model_state"])
-    _model.eval()
-    _tf = transforms.Compose(
-        [
-            transforms.Resize((_img_size, _img_size)),
-            transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
-        ]
-    )
+    so = ort.SessionOptions()
+    so.intra_op_num_threads = 1
+    so.inter_op_num_threads = 1
+    _session = ort.InferenceSession(str(ONNX), sess_options=so, providers=["CPUExecutionProvider"])
+    _input_name = _session.get_inputs()[0].name
 
 
 def prepare_image(pil_image: Image.Image) -> Image.Image:
@@ -129,10 +127,27 @@ def prepare_image(pil_image: Image.Image) -> Image.Image:
         return pil_image.convert("RGB")
 
 
+def _preprocess(img: Image.Image) -> np.ndarray:
+    """RGB PIL → NCHW float32 ImageNet-normalized."""
+    size = _img_size
+    arr = np.asarray(img.convert("RGB").resize((size, size), Image.BILINEAR), dtype=np.float32) / 255.0
+    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
+    arr = (arr - mean) / std
+    return np.transpose(arr, (2, 0, 1))[None, ...].astype(np.float32)
+
+
+def _softmax(logits: np.ndarray) -> np.ndarray:
+    x = logits.astype(np.float64)
+    x = x - x.max()
+    e = np.exp(x)
+    return (e / e.sum()).astype(np.float64)
+
+
 def _forward(img: Image.Image) -> np.ndarray:
-    x = _tf(img.convert("RGB")).unsqueeze(0)
-    with torch.no_grad():
-        return torch.softmax(_model(x), dim=1)[0].cpu().numpy()
+    x = _preprocess(img)
+    logits = _session.run(None, {_input_name: x})[0][0]
+    return _softmax(logits)
 
 
 def _letterbox(pil: Image.Image, size: int) -> Image.Image:
