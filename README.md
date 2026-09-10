@@ -204,13 +204,6 @@ Las contribuciones hacen grande al open source. ¡Cualquier PR es bienvenida!
         <sub>@Dreelliot</sub>
       </a>
     </td>
-    <td align="center" width="160">
-      <a href="https://github.com/hexed-AAL1X">
-        <img src="https://github.com/hexed-AAL1X.png" width="88" height="88" alt="Leonardo Bravo" style="border-radius:50%;" /><br />
-        <b>Leonardo Bravo</b><br />
-        <sub>@hexed-AAL1X</sub>
-      </a>
-    </td>
   </tr>
 </table>
 
