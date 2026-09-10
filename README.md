@@ -1,178 +1,227 @@
 <a id="readme-top"></a>
+<!-- SHIELDS -->
+<img src="https://github.com/AnderMendoza/AnderMendoza/raw/main/assets/line-neon.gif" width="100%">
+<p align='center'> 
+  <img alt="GitHub Repo contributors" src="https://img.shields.io/github/contributors/hexed-AAL1X/FruitGuard?style=for-the-badge">&nbsp;
+  <img alt="GitHub Repo forks" src="https://img.shields.io/github/forks/hexed-AAL1X/FruitGuard?style=for-the-badge">&nbsp;
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/hexed-AAL1X/FruitGuard?style=for-the-badge">&nbsp;
+  <img alt="GitHub Repo issues" src="https://img.shields.io/github/issues/hexed-AAL1X/FruitGuard?style=for-the-badge">&nbsp;
+</p>
 
+<!-- PROJECT LOGO -->
+<br>
 <div align="center">
-  <h1>🍎 FruitGuard</h1>
-  <p><strong>Clasificador inteligente de frutas y estado de frescura</strong></p>
-
-  <p>
-    <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-    <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" />
-    <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" />
-    <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
-    <img src="https://img.shields.io/badge/GitHub-hexed--AAL1X-181717?style=for-the-badge&logo=github" />
-  </p>
-
-  <p>
-    <a href="#sobre-el-proyecto">Sobre el proyecto</a> ·
-    <a href="#mejoras-v2">Mejoras v2</a> ·
-    <a href="#datasets">Datasets</a> ·
-    <a href="#estructura">Estructura</a> ·
-    <a href="#empezar">Empezar</a> ·
-    <a href="#contributors">Contributors</a>
-  </p>
+   <img src="assets/images/logo.png" alt="FruitGuard Logo" width="120">
+   <h3 align="center">🍎 FruitGuard</h3>
+   <p align="center">
+     Clasificador inteligente de frutas y frescura en tiempo real
+     <br>
+     <a href="https://github.com/hexed-AAL1X/FruitGuard"><strong>Explore the docs »</strong></a>
+     <br>
+     <br>
+     <a href="https://github.com/hexed-AAL1X/FruitGuard">View Demo</a>
+     ·
+     <a href="https://github.com/hexed-AAL1X/FruitGuard/issues/new?labels=bug">Report Bug</a>
+     ·
+     <a href="https://github.com/hexed-AAL1X/FruitGuard/issues/new?labels=enhancement">Request Feature</a>
+   </p>
 </div>
 
----
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li><a href="#important-notices">Important Notices</a></li>
+    <li><a href="#datasets">Datasets</a></li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#contributing">Contributing</a>
+      <ul>
+        <li><a href="#top-contributors">Top Contributors</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+<br>
 
-## Sobre el proyecto
+<!-- ABOUT THE PROJECT -->
+<a id="about-the-project"></a>***About The Project***
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-FruitGuard es un sistema automático de **control de calidad alimentaria** que clasifica frutas por tipo y estado (fresca o podrida) a partir de imágenes digitales, usando visión por computadora y aprendizaje automático.
+<div align="center">
+  <img src="assets/images/logo.png" alt="FruitGuard" width="160">
+</div>
 
-**Objetivo:** reemplazar la inspección manual —lenta y subjetiva— con un pipeline automatizado que funcione en tiempo real sobre cualquier imagen.
+**FruitGuard** es un sistema de control de calidad alimentaria que clasifica frutas/verduras por **tipo** y **estado** (fresca o podrida) a partir de imágenes, con cámara en vivo o foto subida.
 
----
+Nació para reemplazar la inspección manual —lenta y subjetiva— con un pipeline de visión por computadora usable en condiciones reales (mesa, fondos variados, varias piezas).
 
-## Mejoras v2
+Here's why:
 
-La versión original presentaba un problema crítico: **solo detectaba frutas correctamente sobre fondos blancos**. Esto hacía al sistema ineficiente en condiciones reales.
+* Detecta en **tiempo real** desde la webcam o desde una imagen.
+* Usa un **CNN (MobileNetV3)** entrenado con Freshness44 + ensemble en inferencia.
+* Backend **FastAPI** + frontend web (sin Gradio).
+* Pensado para desplegarse en un solo servicio (p. ej. Render).
 
-### 🔧 Problema raíz
-Las características (color, textura, forma) se extraían de **toda la imagen**, incluyendo el fondo, lo que contaminaba el vector de features.
+<a id="built-with"></a>
+### Built With
+* ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)&nbsp;
+* ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)&nbsp;
+* ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)&nbsp;
+* ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)&nbsp;
+* ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)&nbsp;
+* ![Git](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)&nbsp;
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### ✅ Solución implementada — Segmentación GrabCut
+<!-- IMPORTANT NOTICES -->
+<a id="important-notices"></a>***Important Notices***
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-| Aspecto                  | v1 (original)                          | v2 (mejorado)                                 |
-|--------------------------|----------------------------------------|-----------------------------------------------|
-| Segmentación             | `adaptiveThreshold` (asume fondo blanco) | **GrabCut** (cualquier fondo)                |
-| Features de color        | Media/std de toda la imagen            | Solo píxeles de la fruta (máscara aplicada)  |
-| Features de contorno     | Threshold binario                      | Máscara GrabCut directamente                 |
-| Robustez                 | Falla con fondos oscuros/coloridos     | Fallback elíptico si GrabCut falla           |
-| Interface                | Gradio (local)                         | **FastAPI REST + Frontend web**              |
+> [!NOTE]  
+> Para instalar y ejecutar FruitGuard necesitas:
 
-### Otros problemas corregidos
-- **`ZeroDivisionError`** en circularidad cuando el perímetro era 0
-- **Feature vector inestable**: tamaño variable ahora manejado con padding/truncado
-- **Sin API**: ahora tiene un backend REST con endpoints documentados (`/docs`)
-- **Sin frontend desacoplado**: interfaz web independiente del backend
+> | Requirement | Description |
+> |-------------|-------------|
+> | Python | ![Python](https://img.shields.io/badge/Python_3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white&color=black) |
+> | API | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white&color=black) |
+> | ML | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white&color=black) |
 
----
+> [!IMPORTANT]  
+> El modelo ya viene entrenado en `backend/models/fruit_cnn.pt`. **No hace falta** el dataset para usar la app; solo si quieres reentrenar.
 
-## Datasets
+> [!WARNING]  
+> No es un modelo tipo GPT/Gemini: puede fallar en fotos difíciles (pantallas, fondos raros, clases muy parecidas). Sigue mejorando con priors + ensemble.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-El modelo actual (`fruit_cnn.pt`) se entrenó con datos públicos de Kaggle. **Créditos a sus autores:**
+<!-- DATASETS -->
+<a id="datasets"></a>***Datasets***
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-| Dataset | Autor | Uso en FruitGuard | Enlace |
-|---------|--------|-------------------|--------|
-| **Freshness44** | [siavash93](https://www.kaggle.com/siavash93) | Entrenamiento principal del CNN (≈53k imágenes, 22 frutas/verduras × fresca/podrida, fondos variados) | [kaggle.com/datasets/siavash93/freshness44](https://www.kaggle.com/datasets/siavash93/freshness44) |
-| **Fresh and Stale Classification** | [swoyam2609](https://www.kaggle.com/swoyam2609) | Prototipo inicial y experimentos previos de clasificación fresca/podrida | [kaggle.com/datasets/swoyam2609/fresh-and-stale-classification](https://www.kaggle.com/datasets/swoyam2609/fresh-and-stale-classification) |
+Créditos a los autores de los datasets públicos usados para entrenar / prototipar:
 
-> Los datasets **no** se incluyen en este repositorio (solo el modelo ya entrenado). Si reentrenas, descárgalos desde Kaggle y respeta sus términos de uso / licencia.
+| Dataset | Autor | Uso | Enlace |
+|---------|--------|-----|--------|
+| **Freshness44** | [siavash93](https://www.kaggle.com/siavash93) | Entrenamiento principal del CNN (~53k imágenes, fresh/rotten, fondos variados) | [Kaggle · Freshness44](https://www.kaggle.com/datasets/siavash93/freshness44) |
+| **Fresh and Stale Classification** | [swoyam2609](https://www.kaggle.com/swoyam2609) | Prototipo inicial fresca/podrida | [Kaggle · Fresh and Stale](https://www.kaggle.com/datasets/swoyam2609/fresh-and-stale-classification) |
 
----
+> Los datasets **no** se incluyen en este repo. Descárgalos en Kaggle si reentrenas y respeta su licencia.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Estructura
+<!-- GETTING STARTED -->
+<a id="getting-started"></a>***Getting Started***
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+
+Instrucciones para levantar FruitGuard en local.
+
+<a id="prerequisites"></a>
+### Prerequisites
+* Python **3.10+**
+* `pip` / `venv`
+* Cámara (opcional, para modo en vivo)
+
+<a id="installation"></a>
+### Installation
+
+1. Clona el repositorio
+   ```sh
+   git clone https://github.com/hexed-AAL1X/FruitGuard.git
+   ```
+2. Entra al proyecto
+   ```sh
+   cd FruitGuard
+   ```
+3. Crea el entorno e instala dependencias
+   ```sh
+   cd backend
+   python -m venv .venv
+   source .venv/bin/activate   # Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+4. Arranca la API (también sirve el frontend)
+   ```sh
+   uvicorn main:app --host 0.0.0.0 --port 8000
+   ```
+5. Abre la app
+   - App: http://127.0.0.1:8000/app/
+   - Docs: http://127.0.0.1:8000/docs
+
+#### Estructura
 
 ```
 FruitGuard/
-├── backend/
-│   ├── main.py              ← API FastAPI (/predict, /health, sirve /app)
-│   ├── cnn_predictor.py     ← MobileNetV3 + ensemble
-│   ├── preprocess.py        ← Aislamiento de fruta
-│   ├── predictor.py
-│   ├── requirements.txt
-│   └── models/
-│       └── fruit_cnn.pt     ← Modelo Freshness44
-│
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   ├── app.js
-│   └── icon.png
-│
+├── backend/          # FastAPI + CNN
+│   └── models/fruit_cnn.pt
+├── frontend/         # UI web
+├── assets/images/    # Logo README
 └── README.md
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
----
+<!-- CONTRIBUTING -->
+<a id="contributing"></a>***Contributing***
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
 
-## Empezar
+Las contribuciones hacen grande al open source. ¡Cualquier PR es bienvenida!
 
-### Prerrequisitos
+1. Fork del proyecto
+2. Crea una rama (`git checkout -b feature/Mejora`)
+3. Commit (`git commit -m 'Add Mejora'`)
+4. Push (`git push origin feature/Mejora`)
+5. Abre un Pull Request
 
-```bash
-python --version  # >= 3.10
-```
+<a id="top-contributors"></a>
+### Top contributors
 
-### Instalación
-
-```bash
-cd backend/
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### Ejecutar
-
-```bash
-cd backend/
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-Abre:
-- **App**: http://127.0.0.1:8000/app/
-- **API docs**: http://127.0.0.1:8000/docs
-
----
-
-## API Reference
-
-```
-POST /predict
-  Body: multipart/form-data  { file: <imagen> }
-  Response: {
-    "fruit": "Manzana",
-    "estado": "Fresca",
-    "emoji": "🍎",
-    "confidence": 0.94,
-    "confidence_pct": "94.0%",
-    "message": "🍎 Manzana — Fresca",
-    "top": [...]
-  }
-
-GET /health   → { "status": "ok" }
-GET /docs     → Swagger UI
-```
-
----
-
-## Contributors
+<div align="center">
 
 <table>
   <tr>
-    <td align="center">
+    <td align="center" width="160">
       <a href="https://github.com/ZtanQ">
-        <img src="https://github.com/ZtanQ.png" width="80" alt="ZtanQ" /><br/>
-        <sub><b>Gabriel Reyna</b></sub><br/>
-        <sub>ZtanQ</sub>
+        <img src="https://github.com/ZtanQ.png" width="88" height="88" alt="Gabriel Reyna" style="border-radius:50%;" /><br />
+        <b>Gabriel Reyna</b><br />
+        <sub>@ZtanQ</sub>
       </a>
     </td>
-    <td align="center">
+    <td align="center" width="160">
       <a href="https://github.com/Dreelliot">
-        <img src="https://github.com/Dreelliot.png" width="80" alt="Dreelliot" /><br/>
-        <sub><b>André Elliot</b></sub><br/>
-        <sub>Dreelliot</sub>
+        <img src="https://github.com/Dreelliot.png" width="88" height="88" alt="André Elliot" style="border-radius:50%;" /><br />
+        <b>André Elliot</b><br />
+        <sub>@Dreelliot</sub>
       </a>
     </td>
-    <td align="center">
+    <td align="center" width="160">
       <a href="https://github.com/hexed-AAL1X">
-        <img src="https://github.com/hexed-AAL1X.png" width="80" alt="aal1x" /><br/>
-        <sub><b>Leonardo Bravo</b></sub><br/>
-        <sub>aal1x</sub>
+        <img src="https://github.com/hexed-AAL1X.png" width="88" height="88" alt="Leonardo Bravo" style="border-radius:50%;" /><br />
+        <b>Leonardo Bravo</b><br />
+        <sub>@hexed-AAL1X</sub>
       </a>
     </td>
   </tr>
 </table>
 
----
+</div>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<p align="right"><a href="#readme-top">↑ Volver arriba</a></p>
+<!-- CONTACT -->
+<a id="contact"></a>***Contact***
+<img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif">
+<p align="center">
+  <a href="mailto:hexed_aal1x.ops@proton.me"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&color=black" /></a>
+  <a href="https://www.instagram.com/hexed_aal1x"><img src="https://img.shields.io/badge/instagram-%2312100E.svg?&style=for-the-badge&logo=instagram&logoColor=white&color=black" /></a>
+  <a href="https://www.linkedin.com/in/leonardo-bravo-4120b8228/"><img src="https://img.shields.io/badge/linkedin-%2312100E.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=black" /></a>
+</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
