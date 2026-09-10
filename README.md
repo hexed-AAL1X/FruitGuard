@@ -11,7 +11,7 @@
 <!-- PROJECT LOGO -->
 <br>
 <div align="center">
-   <img src="assets/images/logo.png" alt="FruitGuard Logo" width="120">
+   <img src="assets/images/logo.png" alt="FruitGuard Logo" width="320">
    <h3 align="center">🍎 FruitGuard</h3>
    <p align="center">
      Clasificador inteligente de frutas y frescura en tiempo real
